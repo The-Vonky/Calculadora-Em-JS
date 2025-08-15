@@ -1,43 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
+    <title>Calculadora Simples</title>
+    <style>
+        /* Estilo básico para centralizar e deixar bonito */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+
+        .calculadora {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        /* Estilo do visor */
+        #visor {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        /* Estilo dos botões */
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 60px);
+            gap: 5px;
+        }
+
+        button {
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Calculadora em JavaScript tentativa 1</h1>
-    <table>
-        <tr>
-            <td>AC</td>
-            <td>DEL</td>
-            <td>%</td>
-            <td>/</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>X</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>+</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>0</td>
-            <td>.</td>
-            <td>=</td>
-        </tr>
-    </table>
+
+    <!-- Caixa principal da calculadora -->
+    <div class="calculadora">
+        <!-- O visor onde aparece o que digitamos -->
+        <input type="text" id="visor" disabled>
+
+        <!-- Os botões da calculadora -->
+        <div class="botoes">
+            <button onclick="limpar()">AC</button>
+            <button onclick="apagar()">DEL</button>
+            <button onclick="digitar('%')">%</button>
+            <button onclick="digitar('/')">/</button>
+
+            <button onclick="digitar('7')">7</button>
+            <button onclick="digitar('8')">8</button>
+            <button onclick="digitar('9')">9</button>
+            <button onclick="digitar('*')">X</button>
+
+            <button onclick="digitar('4')">4</button>
+            <button onclick="digitar('5')">5</button>
+            <button onclick="digitar('6')">6</button>
+            <button onclick="digitar('-')">-</button>
+
+            <button onclick="digitar('1')">1</button>
+            <button onclick="digitar('2')">2</button>
+            <button onclick="digitar('3')">3</button>
+            <button onclick="digitar('+')">+</button>
+
+            <button></button>
+            <button onclick="digitar('0')">0</button>
+            <button onclick="digitar('.')">.</button>
+            <button onclick="calcular()">=</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para adicionar caracteres no visor
+        function digitar(valor) {
+            document.getElementById("visor").value += valor;
+        }
+
+        // Limpa tudo no visor
+        function limpar() {
+            document.getElementById("visor").value = "";
+        }
+
+        // Apaga o último caractere
+        function apagar() {
+            let atual = document.getElementById("visor").value;
+            document.getElementById("visor").value = atual.slice(0, -1);
+        }
+
+        // Faz a conta e mostra o resultado
+        function calcular() {
+            try {
+                let resultado = eval(document.getElementById("visor").value);
+                document.getElementById("visor").value = resultado;
+            } catch (e) {
+                alert("Erro na operação");
+            }
+        }
+    </script>
+
 </body>
 </html>
